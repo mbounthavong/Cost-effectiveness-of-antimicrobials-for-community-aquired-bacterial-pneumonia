@@ -110,7 +110,7 @@ ceaf <- function(v.wtp, strategies, m.e, m.c, currency = "$"){
       scale_size_manual(values = point.size) +
       #scale_alpha_manual(values=c(rep(0, length(strats)), 0.5)) + 
       xlab(paste("Willingness to pay (Thousand ", currency,"/QALY)", sep = "")) +
-      ylab("Pr Cost-Effective") +
+      ylab("Probability of Cost-Effectiveness") +
       theme_bw(base_size = 14) +
       theme(legend.position = "bottom")
   )
