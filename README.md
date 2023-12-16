@@ -1,6 +1,7 @@
 # Cost-effectiveness-of-antimicrobials-for-community-aquired-bacterial-pneumonia
 Files for the study evaluating the cost-effectiveness of antimicrobials for community-acquired pneumonia. 
 
+Several R functions were used to generate the figures and simulations and are located in the [R Functions folder](https://github.com/mbounthavong/Cost-effectiveness-of-antimicrobials-for-community-aquired-bacterial-pneumonia/tree/main/R%20Functions).
 These functions were developed by the [Decision Analysis in R for Technologies in Health (DARTH)](https://darthworkgroup.com/) group. 
 
 
