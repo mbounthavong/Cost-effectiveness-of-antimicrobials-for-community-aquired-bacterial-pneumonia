@@ -1,0 +1,476 @@
+---
+title: "CEA antibacterials for community acquired bacterial pneumonia model: Generating distributions"
+author: "Mark Bounthavong"
+date: "2023-12-15"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+This R Markdown file contains the estimations for the distribution parameters for the CEA for lefamulin and other antibiotics for community acquire bacterial pneumonia.
+
+## Beta distributions for the probabilities in the model
+
+This section contains the beta distribution parameter selection.
+
+For the probabilities in the model, the standard deviation was estimated using the difference between the mean and the lower limit or upper limit. We selected the distance that was shortest between the mean and limits and then divided by 2 to estimate the standard error. This is an invalid approach, so we had to visually inspect the distributions after we entered the mean and estimated standard deviation into our code `beta_params(mean, sd)`. If the distribution looked normal, we kept the estimated standard deviation. If it was skewed, we made adjustments until we got a normal-looking distribution.
+
+We need the following packages to estimate the parameters for the distributions.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+# install.packages("dampack")
+library("dampack")
+library("psych")
+```
+
+### Probability of initial treatment with LEF
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+beta_params(0.92972, 0.035)  # Generate the alpha and beta parameters
+beta3 <- rbeta(10000, 48.66095, 3.678411) # Enter alpha and beta parameters
+describeBy(beta3)
+hist(beta3)
+```
+
+### Probability of initial treatment with LEV
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+beta_params(0.93963, 0.03) # Generate the alpha and beta parameters
+beta3 <- rbeta(10000, 58.28364, 3.744648) # Enter alpha and beta parameters
+describeBy(beta3)
+hist(beta3)
+```
+
+### Probability of initial treatment with MOX
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+beta_params(0.95104, 0.021) # Generate the alpha and beta parameters
+beta3 <- rbeta(10000, 99.46437, 5.120474) # Enter alpha and beta parameters
+describeBy(beta3)
+hist(beta3)
+```
+
+### Probability of initial treatment with CEF
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+beta_params(0.88963, 0.055) # Generate the alpha and beta parameters
+beta3 <- rbeta(10000, 27.98687, 3.472129) # Enter alpha and beta parameters
+describeBy(beta3)
+hist(beta3)
+```
+
+### Probability of initial treatment with CLA
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+beta_params(0.9495, 0.025) # Generate the alpha and beta parameters
+beta3 <- rbeta(10000, 71.89576, 3.82384) # Enter alpha and beta parameters
+describeBy(beta3)
+hist(beta3)
+```
+
+### Probability of hospitaliation and completion of course
+
+We modeled the probability of hospitalization and completing the course of antibiotic treatment for each strategy. However, we used the same alpha and beta parameters for the beta distribution.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+beta_params(0.3028, 0.038) # Generate the alpha and beta parameters
+beta3 <- rbeta(10000, 43.96643, 101.2331) # Enter alpha and beta parameters
+describeBy(beta3)
+hist(beta3)
+```
+
+### Probability of delayed resposne - LEF
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+beta_params(0.93, 0.035) # Generate the alpha and beta parameters
+beta3 <- rbeta(10000, 48.49286, 3.65) # Enter alpha and beta parameters
+describeBy(beta3)
+hist(beta3)
+```
+
+### Probability of delayed resposne - LEV
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+beta_params(0.86, 0.070) # Generate the alpha and beta parameters
+beta3 <- rbeta(10000, 20.27143, 3.3) # Enter alpha and beta parameters
+describeBy(beta3)
+hist(beta3)
+```
+
+### Probability of delayed resposne - MOX
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+beta_params(0.91, 0.033) # Generate the alpha and beta parameters
+beta3 <- rbeta(10000, 67.52802, 6.678595) # Enter alpha and beta parameters
+describeBy(beta3)
+hist(beta3)
+```
+
+### Probability of delayed resposne - CEF
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+beta_params(0.91, 0.033) # Generate the alpha and beta parameters
+beta3 <- rbeta(10000, 67.52802, 6.678595) # Enter alpha and beta parameters
+describeBy(beta3)
+hist(beta3)
+```
+
+### Probability of delayed resposne - CLA
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+beta_params(0.92, 0.040) # Generate the alpha and beta parameters
+beta3 <- rbeta(10000, 41.4, 3.6) # Enter alpha and beta parameters
+describeBy(beta3)
+hist(beta3)
+```
+
+### Probability of ICU admission - LEF
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+beta_params(0.11, 0.014) # Generate the alpha and beta parameters
+beta3 <- rbeta(10000, 54.83388, 443.6559) # Enter alpha and beta parameters
+describeBy(beta3)
+hist(beta3)
+```
+
+### Probability of ICU admission - LEV
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+beta_params(0.11, 0.014) # Generate the alpha and beta parameters
+beta3 <- rbeta(10000, 54.83388, 443.6559) # Enter alpha and beta parameters
+describeBy(beta3)
+hist(beta3)
+```
+
+### Probability of ICU admission - MOX
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+beta_params(0.086, 0.011) # Generate the alpha and beta parameters
+beta3 <- rbeta(10000, 55.78131, 592.8385) # Enter alpha and beta parameters
+describeBy(beta3)
+hist(beta3)
+```
+
+### Probability of ICU admission - CEF
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+beta_params(0.070, 0.009) # Generate the alpha and beta parameters
+beta3 <- rbeta(10000, 56.18926, 746.5144) # Enter alpha and beta parameters
+describeBy(beta3)
+hist(beta3)
+```
+
+### Probability of ICU admission - CLA
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+beta_params(0.106, 0.014) # Generate the alpha and beta parameters
+beta3 <- rbeta(10000, 51.14392, 431.3459) # Enter alpha and beta parameters
+describeBy(beta3)
+hist(beta3)
+```
+
+### Probability of Survival after ICU admission
+
+We modeled the probability of survival after ICU admission for each strategy. However, we used the same alpha and beta parameters for the beta distribution.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+beta_params(0.9, 0.05) # Generate the alpha and beta parameters
+beta3 <- rbeta(10000, 31.5, 3.5) # Enter alpha and beta parameters
+describeBy(beta3)
+hist(beta3)
+```
+
+## Log-normal distribution for the number of days treated/hospitalized
+
+We used the log-normal distribution for resource utilization in terms of days treatment and hospitalization days.
+
+We modeled the average values (e.g., length of stay) for each strategy. However, we used the same mu and sigma parameters for the log-normal distribution. Note: To use the `lnorm_params` we needed the mean and variance. Since we did not have the variance, we assumed that this was `var = (X / 1.96)^2` where `X` was the LL or UL of the 95% confidence interval.
+
+### Length of stay after initial treatment success
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+X = 4.9 - 3.75 # Generate var from 95% CI
+var = (X / 1.96)^2
+lnorm_params(4.9, var) # Generate the mu and sigma
+lnorm1 <- rlnorm(10000, 1.582117, 0.1193159) # Enter the mu and sigma parameters
+describeBy(lnorm1)
+hist(lnorm1)
+```
+
+### Length of stay for early discharge after initial treatment success
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+X = 4.2 - 1.025 # Generate var from 95% CI
+var = (X / 1.96)^2
+lnorm_params(4.2, var) # Generate the mu and sigma
+lnorm1 <- rlnorm(10000, 1.365744, 0.372398) # Enter the mu and sigma parameters
+describeBy(lnorm1)
+hist(lnorm1)
+```
+
+### Length of stay for after initial treatment failure
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+X = 4.2 - 1.025 # Generate var from 95% CI
+var = (X / 1.96)^2
+lnorm_params(4.2, var) # Generate the mu and sigma
+lnorm1 <- rlnorm(10000, 1.365744, 0.372398) # Enter the mu and sigma parameters
+describeBy(lnorm1)
+hist(lnorm1)
+```
+
+### Length of stay for treatment failure
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+X = 10.1 - 1.20 # Generate var from 95% CI
+var = (X / 1.96)^2
+lnorm_params(10.1, var) # Generate the mu and sigma
+lnorm1 <- rlnorm(10000, 2.220489, 0.4290604) # Enter the mu and sigma parameters
+describeBy(lnorm1)
+hist(lnorm1)
+```
+
+### Length of stay in the ICU
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+X = 3 - 2.25 # Generate var from 95% CI
+var = (X / 1.96)^2
+lnorm_params(3, var) # Generate the mu and sigma
+lnorm1 <- rlnorm(10000, 1.090543, 0.1270368) # Enter the mu and sigma parameters
+describeBy(lnorm1)
+hist(lnorm1)
+```
+
+### Treatment duration
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+X = 5 - 2.25 # Generate var from 95% CI
+var = (X / 1.96)^2
+lnorm_params(5, var) # Generate the mu and sigma
+lnorm1 <- rlnorm(10000, 1.57154, 0.275312) # Enter the mu and sigma parameters
+describeBy(lnorm1)
+hist(lnorm1)
+```
+
+## Gamma distribution for cost variables
+
+We used the gamma distribution for cost variables in this cost-effectiveness study.
+
+We generated the shape and rate parameter for the gamma distribution by using the `gamma_params` function. We set the `scale = FALSE` so that we can get the raw values prior to transformation, in this case costs.
+
+### Cost of oral LEF
+
+We used a gamma distribution for costs.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+gamma_params(254.77, 31.85, scale = FALSE) # To convert back to raw values ($) use `scale = FALSE`
+gamma1 <- rgamma(10000, 63.98493, 0.2511478) # Enter shape and rate parameters
+describeBy(gamma1)
+hist(gamma1)
+```
+
+### Cost of oral LEV
+
+We used a gamma distribution for costs.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+gamma_params(0.22, 0.028, scale = FALSE) # To convert back to raw values ($) use `scale = FALSE`
+gamma1 <- rgamma(10000, 61.73469, 280.6122) # Enter shape and rate parameters
+describeBy(gamma1)
+hist(gamma1)
+```
+
+### Cost of oral MOX
+
+We used a gamma distribution for costs.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+gamma_params(2.35, 0.294, scale = FALSE) # To convert back to raw values ($) use `scale = FALSE`
+gamma1 <- rgamma(10000, 63.8912, 27.18775) # Enter shape and rate parameters
+describeBy(gamma1)
+hist(gamma1)
+```
+
+### Cost of IV CEF
+
+We used a gamma distribution for costs.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+gamma_params(2.86, 0.358, scale = FALSE) # To convert back to raw values ($) use `scale = FALSE`
+gamma1 <- rgamma(10000, 63.82135, 22.31516) # Enter shape and rate parameters
+describeBy(gamma1)
+hist(gamma1)
+```
+
+### Cost of oral CLA
+
+We used a gamma distribution for costs.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+gamma_params(9.63, 1.204, scale = FALSE) # To convert back to raw values ($) use `scale = FALSE`
+gamma1 <- rgamma(10000, 63.97342, 6.643139) # Enter shape and rate parameters
+describeBy(gamma1)
+hist(gamma1)
+```
+
+### Cost of Physican encounter in the inpatient setting
+
+We used a gamma distribution for costs.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+gamma_params(198.29, 24.787, scale = FALSE) # To convert back to raw values ($) use `scale = FALSE`
+gamma1 <- rgamma(10000, 63.99613, 0.3227401) # Enter shape and rate parameters
+describeBy(gamma1)
+hist(gamma1)
+```
+
+### Cost of hospital stay per day
+
+We used a gamma distribution for costs.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+gamma_params(2823, 351.881, scale = FALSE) # To convert back to raw values ($) use `scale = FALSE`
+gamma1 <- rgamma(10000, 64.36209, 0.02279918) # Enter shape and rate parameters
+describeBy(gamma1)
+hist(gamma1)
+```
+
+### Cost of ICU physician encounter
+
+We used a gamma distribution for costs.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+gamma_params(213.83, 26.729, scale = FALSE) # To convert back to raw values ($) use `scale = FALSE`
+gamma1 <- rgamma(10000, 63.9988, 0.2992976) # Enter shape and rate parameters
+describeBy(gamma1)
+hist(gamma1)
+```
+
+### Cost of ICU night stay
+
+We used a gamma distribution for costs.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+gamma_params(3895, 486.908, scale = FALSE) # To convert back to raw values ($) use `scale = FALSE`
+gamma1 <- rgamma(10000, 63.99133, 0.0164291) # Enter shape and rate parameters
+describeBy(gamma1)
+hist(gamma1)
+```
+
+### Cost of chest X-ray (Physician fee)
+
+We used a gamma distribution for costs.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+gamma_params(34.61, 4.326, scale = FALSE) # To convert back to raw values ($) use `scale = FALSE`
+gamma1 <- rgamma(10000, 64.0074, 1.84939) # Enter shape and rate parameters
+describeBy(gamma1)
+hist(gamma1)
+```
+
+### Cost of chest X-ray (Hospital fee)
+
+We used a gamma distribution for costs.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+gamma_params(81.59, 10.199, scale = FALSE) # To convert back to raw values ($) use `scale = FALSE`
+gamma1 <- rgamma(10000, 63.99686, 0.7843714) # Enter shape and rate parameters
+describeBy(gamma1)
+hist(gamma1)
+```
+
+### Cost of CBC labs
+
+We used a gamma distribution for costs.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+gamma_params(7.77, 0.971, scale = FALSE) # To convert back to raw values ($) use `scale = FALSE`
+gamma1 <- rgamma(10000, 64.03296, 8.24105) # Enter shape and rate parameters
+describeBy(gamma1)
+hist(gamma1)
+```
+
+### Cost of basic metabolic panel
+
+We used a gamma distribution for costs.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+gamma_params(8.46, 1.058, scale = FALSE) # To convert back to raw values ($) use `scale = FALSE`
+gamma1 <- rgamma(10000, 63.93952, 7.557863) # Enter shape and rate parameters
+describeBy(gamma1)
+hist(gamma1)
+```
+
+### Cost of sputum culture
+
+We used a gamma distribution for costs.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+gamma_params(9.47, 1.184, scale = FALSE) # To convert back to raw values ($) use `scale = FALSE`
+gamma1 <- rgamma(10000, 63.97298, 6.75533) # Enter shape and rate parameters
+describeBy(gamma1)
+hist(gamma1)
+```
+
+### Cost of blood culture
+
+We used a gamma distribution for costs.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+gamma_params(10.32, 1.290, scale = FALSE) # To convert back to raw values ($) use `scale = FALSE`
+gamma1 <- rgamma(10000, 64, 6.20155) # Enter shape and rate parameters
+describeBy(gamma1)
+hist(gamma1)
+```
+
+### Cost of second-line treatment
+
+We used a gamma distribution for costs.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+gamma_params(20708, 10042, scale = FALSE) # To convert back to raw values ($) use `scale = FALSE`
+gamma1 <- rgamma(10000, 4.252417, 0.0002053514) # Enter shape and rate parameters
+describeBy(gamma1)
+hist(gamma1)
+```
+
+## Beta-distrubtion was used for utility values
+
+Utility scores were given a beta distribution.
+
+### Utility value of hospitalization
+
+We used a beta distribution for utility scores.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+beta_params(0.85, 0.075)  # Generate the alpha and beta parameters) 
+beta3 <- rbeta(10000, 18.41667, 3.25) # Enter alpha and beta parameters
+describeBy(beta3)
+hist(beta3)
+```
+
+### Utility value of discharge
+
+We used a beta distribution for utility scores.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+beta_params(0.92, 0.040)  # Generate the alpha and beta parameters) 
+beta3 <- rbeta(10000, 41.4, 3.6) # Enter alpha and beta parameters
+describeBy(beta3)
+hist(beta3)
+```
+
+### Utility value of failure
+
+We used a beta distribution for utility scores.
+
+```{r, echo = TRUE, warning = FALSE, message = FALSE}
+beta_params(0.61, 0.077)  # Generate the alpha and beta parameters) 
+beta3 <- rbeta(10000, 23.86613, 15.25868) # Enter alpha and beta parameters
+describeBy(beta3)
+hist(beta3)
+```
